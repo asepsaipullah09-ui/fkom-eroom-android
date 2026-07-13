@@ -5,10 +5,10 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
@@ -23,7 +23,7 @@ import java.util.Calendar
 
 class BookingActivity : AppCompatActivity() {
 
-    private lateinit var tvRoomInfo: View
+    private lateinit var tvRoomInfo: TextView
     private lateinit var spinnerKategori: Spinner
     private lateinit var etTanggal: TextInputEditText
     private lateinit var etJamMulai: TextInputEditText
@@ -61,7 +61,7 @@ class BookingActivity : AppCompatActivity() {
         roomId = intent.getIntExtra("room_id", 0)
         roomName = intent.getStringExtra("room_name") ?: "Ruangan"
 
-        tvRoomInfo.findViewById<TextView>(R.id.tvRoomInfo).text = roomName
+        tvRoomInfo.text = roomName
 
         // Setup Spinner Kategori
         val kategoriList = arrayOf("perkuliahan", "praktikum", "rapat", "seminar", "lainnya")
