@@ -1,5 +1,7 @@
 package com.uniku.fkomeroom
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +38,14 @@ class RoomAdapter(private val roomList: List<Room>) :
             "tersedia" -> holder.tvStatus.setBackgroundColor(Color.parseColor("#4CAF50"))
             "maintenance" -> holder.tvStatus.setBackgroundColor(Color.parseColor("#FF9800"))
             "nonaktif" -> holder.tvStatus.setBackgroundColor(Color.parseColor("#F44336"))
+        }
+
+        // Tambah klik listener
+        holder.itemView.setOnClickListener {
+            val context: Context = holder.itemView.context
+            val intent = Intent(context, RoomDetailActivity::class.java)
+            intent.putExtra("room_id", room.id)
+            context.startActivity(intent)
         }
     }
 
