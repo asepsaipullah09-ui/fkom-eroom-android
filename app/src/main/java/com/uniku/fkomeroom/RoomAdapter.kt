@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.uniku.fkomeroom.network.Room
 
 class RoomAdapter(private val roomList: List<Room>) :
     RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
