@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layoutDashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F4F7FE">
+    android:background="#F4F7FE"
+    android:id="@+id/layoutAdminDashboard">
 
     <!-- Header -->
     <LinearLayout
@@ -21,62 +21,56 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
-
             <TextView
-                android:id="@+id/tvUserName"
+                android:id="@+id/tvAdminName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Admin TU FKOM"
+                android:text="Admin"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"/>
-
             <TextView
-                android:id="@+id/tvUserRole"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Administrator"
                 android:textSize="12sp"
                 android:textColor="#E0E0E0"/>
         </LinearLayout>
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
-            app:backgroundTint="#FF5252"
-            app:cornerRadius="8dp"/>
+            app:backgroundTint="#FF5252"/>
     </LinearLayout>
 
-    <!-- Tombol Riwayat -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnRiwayat"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="📋 Riwayat Booking Saya"
-        android:textSize="14sp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="8dp"
-        app:cornerRadius="8dp"
-        app:backgroundTint="#FF9800"/>
-
-    <!-- Judul -->
+    <!-- Menu Admin -->
     <TextView
-        android:id="@+id/tvTitleDaftarRuangan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Daftar Ruangan"
+        android:text="Menu Administrator"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#003366"
         android:layout_margin="16dp"/>
 
-    <!-- RecyclerView untuk daftar ruangan -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRooms"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnKelolaRuangan"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"/>
+        android:layout_height="64dp"
+        android:text="️ Kelola Ruangan (Lihat &amp; Edit Status)"
+        android:textSize="16sp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="#FF9800"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRiwayatBooking"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text=" Approval Booking Masuk"
+        android:textSize="16sp"
+        android:layout_marginHorizontal="16dp"
+        app:backgroundTint="#003366"/>
 
 </LinearLayout>

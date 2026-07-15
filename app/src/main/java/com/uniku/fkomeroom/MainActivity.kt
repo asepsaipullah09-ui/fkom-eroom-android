@@ -75,7 +75,12 @@ class MainActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
 
-                        val intent = Intent(this@MainActivity, DashboardActivity::class.java)
+                        val role = authResponse.data?.user?.role
+                        val intent = if (role == "admin") {
+                            Intent(this@MainActivity, AdminDashboardActivity::class.java)
+                        } else {
+                            Intent(this@MainActivity, DashboardActivity::class.java)
+                        }
                         startActivity(intent)
                         finish()
 

@@ -2,8 +2,10 @@ package com.uniku.fkomeroom
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@Suppress("MISSING_DEPENDENCY_SUPERCLASS_WARNING")
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var tvUserName: TextView
@@ -25,6 +28,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var rvRooms: RecyclerView
     private lateinit var sharedPref: SharedPreferences
     private lateinit var apiInterface: ApiInterface
+    private lateinit var btnRiwayat: MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +38,7 @@ class DashboardActivity : AppCompatActivity() {
         tvUserName = findViewById(R.id.tvUserName)
         tvUserRole = findViewById(R.id.tvUserRole)
         btnLogout = findViewById(R.id.btnLogout)
+        btnRiwayat = findViewById(R.id.btnRiwayat)
         rvRooms = findViewById(R.id.rvRooms)
 
         // Inisialisasi
@@ -56,12 +61,47 @@ class DashboardActivity : AppCompatActivity() {
             else -> "User"
         }
 
-        // Fetch data ruangan
-        fetchRooms()
+        // Logika Tampilan Berdasarkan Role
+        val tvTitle = findViewById<TextView>(R.id.tvTitleDaftarRuangan)
+
+        if (role == "admin") {
+            // Jika Admin: Sembunyikan daftar ruangan untuk booking, ubah judul
+            tvTitle.text = "Kelola Ruangan"
+            // Nanti kita ganti RecyclerView ini jadi tombol Kelola Ruangan
+            rvRooms.visibility = View.GONE
+
+            // Tambah tombol Kelola Ruangan (Kita buat dinamis di sini biar cepat)
+            val btnKelola = MaterialButton(this).apply {
+                text = "️ Kelola Status Ruangan"
+                setBackgroundColor(Color.parseColor("#FF9800"))
+                setTextColor(Color.WHITE)
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply { setMargins(32, 32, 32, 32) }
+                setOnClickListener {
+                    startActivity(Intent(this@DashboardActivity, ManageRoomsActivity::class.java))
+                }
+            }
+            // Tambahkan tombol ke layout utama
+            findViewById<LinearLayout>(R.id.layoutDashboard)?.addView(btnKelola)
+
+        } else {
+            // Jika Mahasiswa/Dosen: Tampilkan daftar ruangan seperti biasa
+            tvTitle.text = "Daftar Ruangan"
+            rvRooms.visibility = View.VISIBLE
+            fetchRooms()
+        }
 
         // Logout
         btnLogout.setOnClickListener {
             logout()
+        }
+
+        // Riwayat
+        btnRiwayat.setOnClickListener {
+            val intent = Intent(this, MyBookingsActivity::class.java)
+            startActivity(intent)
         }
     }
 
